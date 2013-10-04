@@ -28,6 +28,7 @@ module RunOnce
           node[:run_once][cookbook][flag]
     end
     Chef::Log.debug("had_run: #{had_run}")
+    had_run
   end
 
   #######
