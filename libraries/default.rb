@@ -18,8 +18,7 @@ module RunOnce
     if Chef::Config[:solo]
       if File::exists?(@run_once_file)
         values = JSON.parse(IO.read(@run_once_file))
-        had_run = values.key?(cookbook) && values[cookbook].key?(flag) && values[cookbook][flag]
-      else
+        had_run = values.key?(cookbook.to_s) && values[cookbook.to_s].key?(flag.to_s) && values[cookbook.to_s][flag.to_s]
       end
     else
       had_run = node.attribute?(:run_once) &&
@@ -27,7 +26,7 @@ module RunOnce
           node[:run_once][cookbook].attribute?(flag) &&
           node[:run_once][cookbook][flag]
     end
-    Chef::Log.debug("had_run: #{had_run}")
+    Chef::Log.debug("RunOnce [#{cookbook}][#{flag}] had_run: #{had_run}")
     had_run
   end
 
