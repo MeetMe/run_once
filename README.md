@@ -13,9 +13,9 @@ To use in your cookbooks, simply include the run_once recipe and use the
     ruby_bock 'do-something' do
       block do
         # Your code
-        RunOnce.ran(:my_cookbook, :do_something)
+        RunOnce.ran(node, :my_cookbook, :do_something)
       end
-      not_if {RunOnce.has_run?(:my_cookbook, :do_something)}
+      not_if {RunOnce.has_run?(node, :my_cookbook, :do_something)}
     end
 
 Attributes

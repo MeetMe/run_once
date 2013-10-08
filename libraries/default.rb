@@ -13,7 +13,7 @@ module RunOnce
 
   # Function that indicates if the particular run_once value for a cookbook
   # flag is set and true
-  def self.had_run?(cookbook, flag)
+  def self.had_run?(node, cookbook, flag)
     had_run = false
     if Chef::Config[:solo]
       if File::exists?(@run_once_file)
@@ -34,7 +34,7 @@ module RunOnce
   # Set Run Once Ran Flag
 
   # Function that sets the run once ran value for the cookbook and flag
-  def self.ran(cookbook, flag)
+  def self.ran(node, cookbook, flag)
     if Chef::Config[:solo]
       if File::exists?(@run_once_file)
         values = JSON.parse(IO.read(@run_once_file))
@@ -49,5 +49,4 @@ module RunOnce
       node.set[:run_once][cookbook][flag] = true
     end
   end
-
 end
